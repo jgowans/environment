@@ -84,3 +84,8 @@ export TERM=xterm-256color
 # Base16 Shell
 BASE16_SHELL="$HOME/workspace/base16-shell/base16-bright.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
+export PATH=/usr/local/texlive/2014/bin/x86_64-linux:$PATH
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+export EDITOR=vim
