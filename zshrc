@@ -79,7 +79,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export TERM=xterm-256color
+if [[ "$TERM" == "xterm" ]]; then
+    export TERM=xterm-256color
+fi
 
 # Base16 Shell
 BASE16_SHELL="$HOME/workspace/base16-shell/base16-bright.dark.sh"
