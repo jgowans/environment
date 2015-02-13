@@ -12,7 +12,9 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " ========================= Add plugins here ========================
+" ========= After adding a plugin: vim +PluginInstall +qall =========
 Plugin 'chriskempson/base16-vim'
+Plugin 'hynek/vim-python-pep8-indent'
 
 call vundle#end()
 filetype plugin indent on
