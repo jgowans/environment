@@ -38,3 +38,5 @@ set background=dark
 colorscheme base16-bright
 
 
+autocmd FileType tex set expandtab shiftwidth=2 softtabstop=2
+
