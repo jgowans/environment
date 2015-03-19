@@ -28,6 +28,7 @@ set expandtab
 filetype indent plugin on
 
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
+autocmd FileType tex set expandtab shiftwidth=2 softtabstop=2
 
 " show line numbers
 set number
@@ -37,6 +38,5 @@ syntax enable
 set background=dark
 colorscheme base16-bright
 
-
-autocmd FileType tex set expandtab shiftwidth=2 softtabstop=2
+set pastetoggle=<F2>
 
