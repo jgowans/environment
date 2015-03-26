@@ -45,11 +45,10 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git, command-not-found)
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/novell/iprint/bin:/usr/local/texlive/2014/bin/x86_64-linux"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -91,3 +90,8 @@ export PATH=/usr/local/texlive/2014/bin/x86_64-linux:$PATH
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 export EDITOR=vim
+
+# Do not add new command history lines to the $HISTFILE incrementally (as soon as they are entered),
+# rather wait for the session to end before adding history. 
+# This separates the history of each zsh session. 
+unsetopt INC_APPEND_HISTORY  
