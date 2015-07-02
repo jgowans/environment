@@ -39,4 +39,5 @@ set background=dark
 colorscheme base16-bright
 
 set pastetoggle=<F2>
+set relativenumber  " giving this a try...
 
