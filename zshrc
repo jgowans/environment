@@ -45,7 +45,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git, command-not-found)
+plugins=(git, command-not-found, ssh-agent)
 
 # User configuration
 
@@ -57,11 +57,12 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
+ if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
-# else
+    PROMPT="$(hostname) "$PROMPT  # add hostname if SSH'd in
+ else
 #   export EDITOR='mvim'
-# fi
+ fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -87,11 +88,12 @@ BASE16_SHELL="$HOME/workspace/base16-shell/base16-bright.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 export PATH=/usr/local/texlive/2014/bin/x86_64-linux:$PATH
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+#export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 export EDITOR=vim
 
 # Do not add new command history lines to the $HISTFILE incrementally (as soon as they are entered),
 # rather wait for the session to end before adding history. 
 # This separates the history of each zsh session. 
-unsetopt INC_APPEND_HISTORY  
+unsetopt INC_APPEND_HISTORY 
