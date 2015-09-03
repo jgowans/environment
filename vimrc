@@ -31,7 +31,7 @@ autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
 autocmd FileType tex set expandtab shiftwidth=2 softtabstop=2
 
 " show line numbers
-set number
+set relativenumber  " giving this a try...
 " corrects for a black-background terminal by lightening all colours (expecially blue!)
 let base16colorspace=256  " Access colors present in 256 colorspace
 syntax enable
@@ -39,5 +39,4 @@ set background=dark
 colorscheme base16-bright
 
 set pastetoggle=<F2>
-set relativenumber  " giving this a try...
 
