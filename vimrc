@@ -41,3 +41,5 @@ colorscheme base16-bright
 set pastetoggle=<F2>
 
 set viminfo='100,<5000,s10,h   " <5000 is the register buffer size when closing vim. Others are default
+
+set spell
