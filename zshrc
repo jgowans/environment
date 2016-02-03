@@ -92,9 +92,13 @@ export PATH="/home/jgowans/texlive/2015/bin/x86_64-linux:$PATH"
 #export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
+export PATH="/home/jgowans/bin:$PATH"
+
 export EDITOR=vim
 
 # Do not add new command history lines to the $HISTFILE incrementally (as soon as they are entered),
 # rather wait for the session to end before adding history. 
 # This separates the history of each zsh session. 
 unsetopt INC_APPEND_HISTORY 
+
+export PYTHONDONTWRITEBYTECODE=True
