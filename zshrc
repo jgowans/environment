@@ -45,12 +45,12 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git, command-not-found, ssh-agent)
+plugins=(git, command-not-found)
 
 # User configuration
 
-export MANPATH="/home/jgowans/texlive/2015/texmf-dist/doc/man:/usr/local/man:$MANPATH"
-export INFOPATH="/home/jgowans/texlive/2015/texmf-dist/doc/info:$INFOPATH"
+export MANPATH="$HOME/texlive/2015/texmf-dist/doc/man:/usr/local/man:$MANPATH"
+export INFOPATH="$HOME/texlive/2015/texmf-dist/doc/info:$INFOPATH"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -88,11 +88,11 @@ fi
 BASE16_SHELL="$HOME/workspace/base16-shell/base16-bright.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
-export PATH="/home/jgowans/texlive/2015/bin/x86_64-linux:$PATH"
+export PATH="$HOME/texlive/2015/bin/x86_64-linux:$PATH"
 #export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-export PATH="/home/jgowans/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 export EDITOR=vim
 
@@ -102,3 +102,68 @@ export EDITOR=vim
 unsetopt INC_APPEND_HISTORY 
 
 export PYTHONDONTWRITEBYTECODE=True
+
+############ FRMO BCARL ########################
+
+
+#!/bin/bash
+AGENT_SOCKET=$HOME/.ssh/.ssh-agent-socket
+AGENT_INFO=$HOME/.ssh/.ssh-agent-info
+if [[ -s "$AGENT_INFO" ]]
+then
+    source $AGENT_INFO
+fi
+ 
+other=0
+if [[ -z "$SSH_AGENT_PID" ]]
+then
+    running=0
+else
+    running=0
+    for u in `ps -C ssh-agent -o pid=`
+    do
+        if [[ "$running" != "1" ]]
+        then
+            if [[ "$SSH_AGENT_PID" != "$u" ]]
+            then
+                running=2
+                other=$u
+            else
+                running=1
+                echo "Agent $u Already Running"
+            fi
+        fi
+    done
+fi
+ 
+if [[ "$running" != "1" ]]
+then
+    echo "Re-starting Agent"
+    killall -15 ssh-agent
+    #nuke the dot files, if they are still there.
+    if [ -e $AGENT_INFO ]; then rm $AGENT_INFO; fi 
+    if [ -e $AGENT_SOCKET ]; then rm $AGENT_SOCKET; fi   
+    eval `ssh-agent -s -a $AGENT_SOCKET`
+    echo "export SSH_AGENT_PID=$SSH_AGENT_PID" > $AGENT_INFO
+    echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $AGENT_INFO
+    #setup the midway tolken for snowfort
+    ssh-add -s libeToken.so
+    for file in `ls -1 ~/.ssh/*.pem`
+    do
+        ssh-add $file
+    done
+elif [[ "$other" != "0" ]]
+then
+    if ps -p $other|grep $other|grep defunct >/dev/null
+    then
+        echo "DEFUNCT process $other is still running"
+    else
+        echo "WARNING!! non defunct process $other is still running"
+    fi
+fi
+
+###################################
+
+export EDITOR=vim
+
+export TERM=xterm-256color
